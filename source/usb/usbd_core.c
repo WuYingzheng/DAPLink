@@ -394,7 +394,7 @@ static inline BOOL USBD_ReqGetDescriptor(void)
                         pD = (U8 *)USBD_ConfigDescriptor;
                         ((USB_CONFIGURATION_DESCRIPTOR *)pD)->bDescriptorType = USB_OTHER_SPEED_CONFIG_DESCRIPTOR_TYPE; //same descriptor is used in main configuration
                     }
-
+                    // FIXME: wValueL check.
                     for (n = 0; n != USBD_SetupPacket.wValueL; n++) {
                         if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bLength != 0) {
                             pD += ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;

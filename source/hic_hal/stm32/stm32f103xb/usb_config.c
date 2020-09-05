@@ -72,22 +72,23 @@
 //     <i> These settings affect String Descriptor
 //     <o0.0..15> Language ID <0x0000-0xFCFF>
 //       <i> English (United States) = 0x0409
+#define USBD_STRDESC_LANGID         0x0409
 //     <s0.126> Manufacturer String
 //       <i> String descriptor describing manufacturer
+#define USBD_STRDESC_MAN            "ARM"
 //     <s1.126> Product String
 //       <i> String descriptor describing product
+#define USBD_STRDESC_PROD           "DAPLink CMSIS-DAP"
 //     <e1.0> Serial Number
 //       <i> Enable serial number string
 //       <i> If disabled serial number string will not be assigned to the USB Device
+#define USBD_STRDESC_SER_ENABLE     1
 //       <s2.126> Serial Number String
 //         <i> String descriptor describing device's serial number
+#define USBD_STRDESC_SER            "0001A0000000"
 //     </e>
 //   </h>
-#define USBD_STRDESC_LANGID         0x0409
-#define USBD_STRDESC_MAN            L"ARM"
-#define USBD_STRDESC_PROD           L"DAPLink CMSIS-DAP"
-#define USBD_STRDESC_SER_ENABLE     1
-#define USBD_STRDESC_SER            L"0001A0000000"
+
 
 //   <e0> Class Support
 //     <i> Enables USB Device Class specific Requests
@@ -155,8 +156,8 @@
 #define USBD_HID_HS_ENABLE          0
 #define USBD_HID_HS_WMAXPACKETSIZE  64
 #define USBD_HID_HS_BINTERVAL       6
-#define USBD_HID_STRDESC            L"CMSIS-DAP-v1-MuseLab"
-#define USBD_WEBUSB_STRDESC         L"WebUSB: CMSIS-DAP"
+#define USBD_HID_STRDESC            "CMSIS-DAP-v1-MuseLab"
+#define USBD_WEBUSB_STRDESC         "WebUSB: CMSIS-DAP"
 #define USBD_HID_INREPORT_NUM       1
 #define USBD_HID_OUTREPORT_NUM      1
 #define USBD_HID_INREPORT_MAX_SZ    64
@@ -206,7 +207,7 @@
 #define USBD_MSC_HS_ENABLE          0
 #define USBD_MSC_HS_WMAXPACKETSIZE  512
 #define USBD_MSC_HS_BINTERVAL       0
-#define USBD_MSC_STRDESC            L"USB_MSC"
+#define USBD_MSC_STRDESC            "USB_MSC"
 // Make sure changes to USBD_MSC_INQUIRY_DATA are coordinated with mbed-ls
 // since this is used to detect DAPLink drives
 #define USBD_MSC_INQUIRY_DATA       "MBED    "         \
@@ -251,9 +252,9 @@
 #define USBD_ADC_BINTERVAL          1
 #define USBD_ADC_HS_ENABLE          0
 #define USBD_ADC_HS_WMAXPACKETSIZE  64
-#define USBD_ADC_CIF_STRDESC        L"USB_ADC"
-#define USBD_ADC_SIF1_STRDESC       L"USB_ADC1"
-#define USBD_ADC_SIF2_STRDESC       L"USB_ADC2"
+#define USBD_ADC_CIF_STRDESC        "USB_ADC"
+#define USBD_ADC_SIF1_STRDESC       "USB_ADC1"
+#define USBD_ADC_SIF2_STRDESC       "USB_ADC2"
 #define USBD_ADC_BSUBFRAMESIZE      2
 #define USBD_ADC_BBITRESOLUTION     16
 #define USBD_ADC_TSAMFREQ           32000
@@ -333,8 +334,8 @@
 #define USBD_CDC_ACM_HS_ENABLE1         0
 #define USBD_CDC_ACM_HS_WMAXPACKETSIZE1 16
 #define USBD_CDC_ACM_HS_BINTERVAL1      0
-#define USBD_CDC_ACM_CIF_STRDESC        L"mbed Serial Port"
-#define USBD_CDC_ACM_DIF_STRDESC        L"mbed Serial Port"
+#define USBD_CDC_ACM_CIF_STRDESC        "mbed Serial Port"
+#define USBD_CDC_ACM_DIF_STRDESC        "mbed Serial Port"
 #define USBD_CDC_ACM_SENDBUF_SIZE       64
 #define USBD_CDC_ACM_RECEIVEBUF_SIZE    64
 #if (((USBD_CDC_ACM_HS_ENABLE1) && (USBD_CDC_ACM_SENDBUF_SIZE    < USBD_CDC_ACM_HS_WMAXPACKETSIZE1)) || (USBD_CDC_ACM_SENDBUF_SIZE    < USBD_CDC_ACM_WMAXPACKETSIZE1))
@@ -386,7 +387,7 @@
 #define USBD_BULK_WMAXPACKETSIZE     64
 #define USBD_BULK_HS_ENABLE          0
 #define USBD_BULK_HS_WMAXPACKETSIZE  512
-#define USBD_BULK_STRDESC            L"CMSIS-DAP-v2-MuseLab"
+#define USBD_BULK_STRDESC            "CMSIS-DAP-v2-MuseLab"
 
 /* USB Device Calculations ---------------------------------------------------*/
 
@@ -402,7 +403,7 @@
 #define USBD_EP_NUM_CALC6           MAX(USBD_EP_NUM_CALC4, USBD_EP_NUM_CALC5)
 #define USBD_EP_NUM_CALC7           MAX((USBD_BULK_ENABLE*(USBD_BULK_EP_BULKIN)), (USBD_BULK_ENABLE*(USBD_BULK_EP_BULKOUT)))
 #define USBD_EP_NUM                 MAX(USBD_EP_NUM_CALC6, USBD_EP_NUM_CALC7)
- 
+
 
 #if    (USBD_HID_ENABLE)
 #if    (USBD_MSC_ENABLE)
@@ -477,7 +478,7 @@
 #define USBD_WEBUSB_IF_STR_NUM     (3+USBD_STRDESC_SER_ENABLE+USBD_ADC_ENABLE*3+USBD_CDC_ACM_ENABLE*2+USBD_HID_ENABLE)
 #define USBD_MSC_IF_STR_NUM        (3+USBD_STRDESC_SER_ENABLE+USBD_ADC_ENABLE*3+USBD_CDC_ACM_ENABLE*2+USBD_HID_ENABLE+USBD_WEBUSB_ENABLE)
 #define USBD_BULK_IF_STR_NUM       (3+USBD_STRDESC_SER_ENABLE+USBD_ADC_ENABLE*3+USBD_CDC_ACM_ENABLE*2+USBD_HID_ENABLE+USBD_WEBUSB_ENABLE+USBD_BULK_ENABLE)
- 
+
 
 #if    (USBD_HID_ENABLE)
 #if    (USBD_HID_HS_ENABLE)
@@ -536,7 +537,7 @@
 #define USBD_MAX_PACKET_CALC2     ((USBD_MAX_PACKET_CALC0 > USBD_MAX_PACKET_CALC1    ) ? (USBD_MAX_PACKET_CALC0) : (USBD_MAX_PACKET_CALC1    ))
 #define USBD_MAX_PACKET_CALC3     ((USBD_BULK_MAX_PACKET > USBD_CDC_ACM_MAX_PACKET1 ) ? (USBD_BULK_MAX_PACKET) : (USBD_CDC_ACM_MAX_PACKET1 ))
 #define USBD_MAX_PACKET           ((USBD_MAX_PACKET_CALC3 > USBD_MAX_PACKET_CALC2    ) ? (USBD_MAX_PACKET_CALC3) : (USBD_MAX_PACKET_CALC2    ))
- 
+
 
 /*------------------------------------------------------------------------------
  *      USB Config Functions

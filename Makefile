@@ -13,6 +13,8 @@ AR=arm-none-eabi-ar
 AS=arm-none-eabi-as
 CP=arm-none-eabi-objcopy
 OD=arm-none-eabi-objdump
+SZ=arm-none-eabi-size
+
 
 # DO NOT EDIT THE FOLLOWING CONTENT
 # Try to include the following two files
@@ -21,7 +23,7 @@ OD=arm-none-eabi-objdump
 -include $(PROJECT)/gcc/source.mk
 
 # Create object list
-OBJECTS:=$(ASOURCES:%.s=%.o)
+OBJECTS=$(ASOURCES:%.s=%.o)
 OBJECTS+=$(CSOURCES:%.c=%.o)
 OBJECTS+=$(CXXSOURCES:%.cpp=%.o)
 OBJECTS:=$(addprefix $(OUT_DIR)/, $(OBJECTS))
@@ -29,6 +31,7 @@ OBJECTS:=$(addprefix $(OUT_DIR)/, $(OBJECTS))
 # Create dependent file
 DEPENDENT:=$(patsubst %c,%d,$(CSOURCES))
 DEPENDENT+=$(patsubst %cpp,%d,$(CXXSOURCES))
+DEPENDENT:=$(addprefix $(OUT_DIR)/, $(DEPENDENT))
 
 ###
 # Build Rules
@@ -50,7 +53,7 @@ debug: build
 
 # By default, gcc uses 4 bytes to store a wide char, while armcc uses 2 bytes.
 # In order to be compatible with armcc, add -fshort-wchar to gcc compiler flags.
-CFLAGS+= -fshort-wchar
+# CFLAGS+= -fshort-wchar
 
 build:
 	echo "hello"
@@ -68,18 +71,18 @@ firmware: $(OBJECTS)
 	@mkdir -p $(PROJECT)/build
 	@echo "Linking object file...\n"
 	@$(CC) $(LDFLAGS) -Wl,-Map=$(OUT_DIR)/daplink.map $^ -o $(OUT_DIR)/daplink.elf
-	@echo "Finished building target: $<!\n"
+	@echo "Finished building target: $(OUT_DIR)/daplink.elf!\n"
 
 # 后处理，生成 .bin .hex 文件
 post-build:
 	@echo 'Generating binary and Printing size information:'
-	$(CP) -O binary $(BINDIR)/$(BINELF) $(BINDIR)/$(BINARY)
-	$(CP) -O ihex   $(BINDIR)/$(BINELF) $(BINDIR)/$(BINHEX)
-	$(SIZE) $(BINDIR)/$(BINELF)
+	$(CP) -O binary $(OUT_DIR)/daplink.elf $(OUT_DIR)/daplink.bin
+	$(CP) -O ihex   $(OUT_DIR)/daplink.elf $(OUT_DIR)/daplink.hex
+	$(SZ) $(OUT_DIR)/daplink.elf
 	@echo ' '
 
 # Include all .d files
-# -include $(DEPENDENT)
+-include $(DEPENDENT)
 
 $(OUT_DIR)/%.o: %.s
 	@mkdir -p $(dir $@)

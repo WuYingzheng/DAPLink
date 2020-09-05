@@ -79,6 +79,7 @@ CSOURCES+= source/hic_hal/stm32/stm32f103xb/flash.c \
            source/hic_hal/stm32/stm32f103xb/usb_config.c \
            source/hic_hal/stm32/stm32f103xb/usbd_STM32F103.c \
            source/hic_hal/stm32/stm32f103xb/sdk.c \
+           source/hic_hal/stm32/stm32f103xb/cmsis/system_stm32f1xx.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c \

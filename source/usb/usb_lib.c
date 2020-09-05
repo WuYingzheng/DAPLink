@@ -2337,24 +2337,72 @@ U8 USBD_ConfigDescriptor_HS[200] = { 0 };
 
 #endif
 
+
+/**
+  * @brief  USBD_GetLen
+  *         return the string length
+   * @param  buf : pointer to the ascii string buffer
+  * @retval string length
+  */
+const uint8_t USBD_GetLen(uint8_t *buf)
+{
+    uint8_t  len = 0U;
+
+    while (*buf != '\0')
+    {
+        len++;
+        buf++;
+    }
+
+    return len;
+}
+
+/**
+  * @brief  USBD_GetString
+  *         Convert Ascii string into unicode one
+  * @param  desc : descriptor buffer
+  * @param  unicode : Formatted string buffer (unicode)
+  * @param  len : descriptor length
+  * @retval None
+  */
+void USBD_SetStringDesc(USB_STRING_DESCRIPTOR* desc, uint8_t *desc_str)
+{
+    uint8_t  idx = 0U;
+    uint8_t *ptr = NULL;
+
+    if (desc != NULL)
+    {
+        desc->bLength = (uint8_t)USBD_GetLen(desc_str) * 2U + 2U;
+        desc->bDescriptorType = USB_STRING_DESCRIPTOR_TYPE;
+        ptr = (uint8_t *)&desc->bString;
+        while (*desc_str != '\0')
+        {
+            *ptr++ = *desc_str++;
+            *ptr++ =  0U;
+        }
+    }
+}
+
+void USBD_GetUnicode(uint8_t *desc)
+{
+    return;
+}
+
 /* USB Device Create String Descriptor */
 #define USBD_STR_DEF(n)                 \
   struct {                              \
     U8  len;                            \
     U8  type;                           \
-    U16 str[sizeof(USBD_##n)/2-1];      \
+    U16 str[sizeof(USBD_##n)-1];        \
   } desc##n
 
-#define USBD_STR_VAL(n)                  \
- { sizeof(USBD_##n), USB_STRING_DESCRIPTOR_TYPE, USBD_##n }
-
 __attribute__((weak)) \
-const struct {
+struct {
     struct {
         U8  len;
         U8  type;
         U16 langid;
-    } desc_langid;
+    } descLANGID;
     USBD_STR_DEF(STRDESC_MAN);
     USBD_STR_DEF(STRDESC_PROD);
 #if  (USBD_STRDESC_SER_ENABLE)
@@ -2381,7 +2429,15 @@ const struct {
 #if (USBD_BULK_ENABLE)
     USBD_STR_DEF(BULK_STRDESC);
 #endif
-} USBD_StringDescriptor
+} USBD_StringDescriptor;
+
+#if 0
+// FIXME: convert unicode
+#define USBD_STR_VAL(n)        \
+ { sizeof(USBD_##n) * 2,       \
+   USB_STRING_DESCRIPTOR_TYPE, \
+   USBD_##n }
+
 = {
     { 4, USB_STRING_DESCRIPTOR_TYPE, USBD_STRDESC_LANGID },
     USBD_STR_VAL(STRDESC_MAN),
@@ -2411,6 +2467,55 @@ const struct {
     USBD_STR_VAL(BULK_STRDESC),
 #endif
 };
+#endif
+
+void str_desc_fill()
+{
+    USB_STRING_DESCRIPTOR *desc = NULL;
+    USBD_StringDescriptor.descLANGID.len = 4;
+    USBD_StringDescriptor.descLANGID.type = USB_STRING_DESCRIPTOR_TYPE;
+    USBD_StringDescriptor.descLANGID.langid = USBD_STRDESC_LANGID;
+
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descSTRDESC_MAN;
+    USBD_SetStringDesc(desc, USBD_STRDESC_MAN);
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descSTRDESC_PROD;
+    USBD_SetStringDesc(desc, USBD_STRDESC_PROD);
+
+#if (USBD_STRDESC_SER_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descSTRDESC_SER;
+    USBD_SetStringDesc(desc, USBD_STRDESC_SER);
+#endif
+#if (USBD_ADC_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descADC_CIF_STRDESC;
+    USBD_SetStringDesc(desc, USBD_ADC_CIF_STRDESC);
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.ADC_SIF1_STRDESC;
+    USBD_SetStringDesc(desc, USBD_ADC_SIF1_STRDESC);
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.ADC_SIF2_STRDESC;
+    USBD_SetStringDesc(desc, USBD_ADC_SIF2_STRDESC);
+#endif
+#if (USBD_CDC_ACM_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descCDC_ACM_CIF_STRDESC;
+    USBD_SetStringDesc(desc, USBD_CDC_ACM_CIF_STRDESC);
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descCDC_ACM_DIF_STRDESC;
+    USBD_SetStringDesc(desc, USBD_CDC_ACM_DIF_STRDESC);
+#endif
+#if (USBD_HID_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descHID_STRDESC;
+    USBD_SetStringDesc(desc, USBD_HID_STRDESC);
+#endif
+#if (USBD_WEBUSB_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descWEBUSB_STRDESC;
+    USBD_SetStringDesc(desc, USBD_WEBUSB_STRDESC);
+#endif
+#if (USBD_MSC_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descMSC_STRDESC;
+    USBD_SetStringDesc(desc, USBD_MSC_STRDESC);
+#endif
+#if (USBD_BULK_ENABLE)
+    desc = (USB_STRING_DESCRIPTOR *)&USBD_StringDescriptor.descBULK_STRDESC;
+    USBD_SetStringDesc(desc, USBD_BULK_STRDESC);
+#endif
+}
 
 #if (USBD_WEBUSB_ENABLE)
 
@@ -2672,6 +2777,7 @@ void usbd_class_init(void)
     U8  if_num = 0;
     U16 desc_ptr = 0;
 
+    str_desc_fill();
     desc_ptr += start_desc_fill(&USBD_ConfigDescriptor[desc_ptr], &USBD_ConfigDescriptor_HS[desc_ptr], if_num);
 
 #if (USBD_ADC_ENABLE)
