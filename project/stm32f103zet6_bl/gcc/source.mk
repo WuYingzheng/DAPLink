@@ -64,7 +64,6 @@ CSOURCES+= source/hic_hal/stm32/stm32f103xb/read_uid.c \
            source/hic_hal/stm32/stm32f103xb/sdk.c \
            source/hic_hal/stm32/stm32f103xb/cmsis/system_stm32f1xx.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
-           source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c \
            source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
@@ -115,4 +114,4 @@ CSOURCES+= source/usb/usb_lib.c \
            source/usb/usbd_core.c \
            source/usb/msc/usbd_msc.c \
            source/usb/msc/usbd_core_msc.c
-           
+

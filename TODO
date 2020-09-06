@@ -1,1 +1,4 @@
-# 使用 FreeRTOS 替换 RTX RTOS
+# replace RTX RTOS with FreeRTOS.   [Done]
+
+# FIXME: source/daplink/info.c:204 void info_init(void)
+  Hardware fault

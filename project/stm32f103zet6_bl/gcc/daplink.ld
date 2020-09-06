@@ -42,9 +42,9 @@ _Min_Stack_Size = 0x860; /* required amount of stack */
 /* Specify the memory layout. */
 MEMORY
 {
-FLASH_BL    (rx) : ORIGIN = 0x08000000, LENGTH = 127K  /* bootloader */
-FLASH_ADMIN (rx) : ORIGIN = 0x0801FC00, LENGTH = 1K    /* admin config */
-FLASH_IF    (rx) : ORIGIN = 0x08020000, LENGTH = 447K  /* dap interface */
+FLASH_BL    (rx) : ORIGIN = 0x08000000, LENGTH = 191K  /* bootloader */
+FLASH_ADMIN (rx) : ORIGIN = 0x0802FC00, LENGTH = 1K    /* admin config */
+FLASH_IF    (rx) : ORIGIN = 0x08030000, LENGTH = 383K  /* dap interface */
 FLASH_USER  (rx) : ORIGIN = 0x0807FC00, LENGTH = 1020  /* user config */
 FLASH_CRC   (rx) : ORIGIN = 0x08079996, LENGTH = 4     /* crc32 */
 

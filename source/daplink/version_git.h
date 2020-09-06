@@ -22,7 +22,7 @@
 #ifndef VERSION_GIT_H
 #define VERSION_GIT_H
 
-#define GIT_COMMIT_SHA  "54b7b072ceb4822df2e11be0dba406c9f734fbd0"
+#define GIT_COMMIT_SHA  "ce50552e74ce99bd2cb9b2beb783a34a6e377ec2"
 #define GIT_LOCAL_MODS  1
 
 #endif

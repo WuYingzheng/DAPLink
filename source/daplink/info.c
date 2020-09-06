@@ -201,6 +201,7 @@ static void setup_string_descriptor()
     }
 }
 
+// FIXME: hardware fault here.
 void info_init(void)
 {
     info_crc_compute();
