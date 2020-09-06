@@ -115,6 +115,8 @@ static HeapRegion_t xHeapRegions[] = {
 #endif /* USE_FreeRTOS_HEAP_5 */
 
 #if defined(SysTick)
+
+#error "systick"
 /* FreeRTOS tick timer interrupt handler prototype */
 extern void xPortSysTickHandler (void);
 

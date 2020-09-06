@@ -26,7 +26,6 @@ CSOURCES+= source/daplink/bootloader/main.c \
            source/daplink/crc32.c \
            source/daplink/error.c \
            source/daplink/flash_hal.c \
-           source/daplink/HardFault_Handler.c \
            source/daplink/info.c \
            source/daplink/sdk_stub.c \
            source/daplink/util.c \
@@ -55,7 +54,8 @@ INCLUDES+= -I source/hic_hal/stm32/stm32f103xb/STM32F1xx_HAL_Driver/Inc \
            -I source/hic_hal/stm32/stm32f103xb \
            -I source/hic_hal
 
-CSOURCES+= source/hic_hal/stm32/stm32f103xb/read_uid.c \
+CSOURCES+= source/hic_hal/stm32/stm32f103xb/stm32f1xx_it.c \
+           source/hic_hal/stm32/stm32f103xb/read_uid.c \
            source/hic_hal/stm32/stm32f103xb/flash.c \
            source/hic_hal/stm32/stm32f103xb/gpio.c \
            source/hic_hal/stm32/stm32f103xb/uart.c \

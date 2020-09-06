@@ -10,5 +10,4 @@ CXXFLAGS+=-c $(MCUFLAGS)
 
 # LINKER FLAGS
 LDSCRIPT= project/stm32f103zet6_bl/gcc/daplink.ld
-# --specs=nano.specs: use newlib-nano
 LDFLAGS:= $(MCUFLAGS) -T $(LDSCRIPT)

@@ -93,3 +93,217 @@ void HardFault_Handler()
 
     while (1); // Wait for reset
 }
+
+void MemManage_Handler(void)
+{
+    while(1) ;
+}
+
+void BusFault_Handler(void)
+{
+    while(1) ;
+}
+
+
+void UsageFault_Handler(void)
+{
+    while(1) ;
+}
+
+#if 0
+  .weak SVC_Handler
+  .thumb_set SVC_Handler,Default_Handler
+
+  .weak PendSV_Handler
+  .thumb_set PendSV_Handler,Default_Handler
+
+  .weak
+#endif
+
+void DebugMon_Handler(void)
+{
+    while(1) ;
+}
+
+void WWDG_IRQHandler(void)
+{
+    while(1) ;
+}
+
+void PVD_IRQHandler(void)
+{
+    while(1) ;
+}
+void TAMPER_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void RTC_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void FLASH_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void RCC_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void EXTI0_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void EXTI1_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void EXTI2_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void EXTI3_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void EXTI4_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel1_IRQHvoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel2_IRQHvoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel3_IRQHvoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel4_IRQHvoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel5_IRQHvoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel6_IRQHvoid(void)
+{
+    while(1) ;
+}
+void DMA1_Channel7_IRQHvoid(void)
+{
+    while(1) ;
+}
+void ADC1_2_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void USB_HP_CAN1_TX_IRQHandlervoid (void)
+{
+    while(1) ;
+}
+void USB_LP_CAN1_RX0_IRQHandlervoid (void)
+{
+    while(1) ;
+}
+void CAN1_RX1_IRQHandler(void)
+{
+    while(1) ;
+}
+
+void CAN1_SCE_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void EXTI9_5_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void TIM1_BRK_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void TIM1_UP_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void TIM1_TRG_COM_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void TIM1_CC_IRQHandlervoid(void)
+{
+    while(1) ;
+}
+void TIM2_IRQHandlervoid (void)
+{
+    while(1) ;
+}
+void TIM3_IRQHandlervoid (void)
+{
+    while(1) ;
+}
+void TIM4_IRQHandler(void)
+{
+    while(1) ;
+}
+void I2C1_EV_IRQHandler(void)
+{
+    while(1) ;
+}
+void I2C1_ER_IRQHandler(void)
+{
+    while(1) ;
+}
+
+
+void I2C2_EV_IRQHandler(void)
+{
+    while(1) ;
+}
+
+void I2C2_ER_IRQHandler(void)
+{
+
+}
+
+void SPI1_IRQHandler(void)
+{
+    while(1)
+    ;
+}
+void SPI2_IRQHandler(void)
+{
+    while(1)
+    ;
+}
+void USART1_IRQHandler(void)
+{
+    while(1)
+    ;
+}
+void USART3_IRQHandler(void)
+{
+    while(1)
+    ;
+}
+void EXTI15_10_IRQHandler(void)
+{
+    while(1)
+    ;
+}
+void RTC_Alarm_IRQHandler(void)
+{
+    while(1)
+    ;
+}
+
+void USBWakeUp_IRQHandler(void)
+{
+    while(1)
+    ;
+}

@@ -62,14 +62,14 @@ pre-build:
 	@python3 tools/pre_build_script.py
 	@echo ' '
 
-firmware: $(OBJECTS)
+$(OUT_DIR)/daplink.elf: $(OBJECTS)
 	@mkdir -p $(PROJECT)/build
 	@echo "Linking object file...\n"
-	@$(CC) $(LDFLAGS) -Wl,-Map=$(OUT_DIR)/daplink.map $(OBJECTS) -o $(OUT_DIR)/daplink.elf
-	@echo "Finished building target: $(OUT_DIR)/daplink.elf!\n"
+	@$(CC) $(LDFLAGS) -Wl,-Map=$(OUT_DIR)/daplink.map $(OBJECTS) -o $@
+	@echo "Finished building target: $@!\n"
 
 # 后处理，生成 .bin .hex 文件
-post-build: firmware
+post-build: $(OUT_DIR)/daplink.elf
 	@echo 'Generating binary and Printing size information:'
 	$(CP) -O binary $(OUT_DIR)/daplink.elf $(OUT_DIR)/daplink.bin
 	$(CP) -O ihex   $(OUT_DIR)/daplink.elf $(OUT_DIR)/daplink.hex

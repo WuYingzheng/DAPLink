@@ -1,4 +1,7 @@
 # replace RTX RTOS with FreeRTOS.   [Done]
 
-# FIXME: source/daplink/info.c:204 void info_init(void)
-  Hardware fault
+# FIXME: hardware assert.
+  source/daplink/info.c:204 void info_init(void)
+  source/daplink/drag-n-drop/vfs_manager.c:381 static void build_filesystem()
+
+# check: xPortSysTickHandler SysTick_Handler

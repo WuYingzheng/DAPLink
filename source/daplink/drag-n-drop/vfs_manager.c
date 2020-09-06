@@ -377,6 +377,7 @@ static bool changing_state()
     return vfs_state != vfs_state_next;
 }
 
+// FIXME: hardware assert here
 static void build_filesystem()
 {
     // Update anything that could have changed file system state
@@ -636,7 +637,7 @@ static void transfer_reset_file_info()
           file_transfer_state = default_transfer_state;
           abort_remount();
     }
-    
+
 }
 
 // Update the tranfer state with new information
