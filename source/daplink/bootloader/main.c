@@ -38,10 +38,18 @@
 #define MSC_LED_DEF GPIO_LED_ON
 #endif
 
-__asm void modify_stack_pointer_and_start_app(uint32_t r0_sp, uint32_t r1_pc)
+typedef  void (*pFunction)(void);
+
+void JumpToApplication(uint32_t r0_sp, uint32_t r1_pc)
 {
-    MOV SP, R0
-    BX R1
+    uint32_t JumpAddress;
+    pFunction JumpToApp;
+
+    JumpAddress = *(__IO uint32_t*) (r1_pc);
+    JumpToApp = (pFunction) JumpAddress;
+    /* Initialize user application's Stack Pointer */
+    __set_MSP(*(__IO uint32_t*) r0_sp);
+    JumpToApp();
 }
 
 // Event flags for main task
@@ -240,7 +248,7 @@ int main(void)
         // change to the new vector table
         SCB->VTOR = g_board_info.target_cfg->flash_regions[0].start; //bootloaders should only have one flash region for interface
         // modify stack pointer and start app
-        modify_stack_pointer_and_start_app((*(uint32_t *)(g_board_info.target_cfg->flash_regions[0].start)), (*(uint32_t *)(g_board_info.target_cfg->flash_regions[0].start + 4)));
+        JumpToApplication((*(uint32_t *)(g_board_info.target_cfg->flash_regions[0].start)), (*(uint32_t *)(g_board_info.target_cfg->flash_regions[0].start + 4)));
     }
 
     // config the usb interface descriptor and web auth token before USB connects

@@ -141,23 +141,23 @@ int32_t uart_set_configuration(UART_Configuration *config)
     stop_bits -= 1;
 
     switch (config->Parity) {
-        case UART_PARITY_ODD:
+        case DAP_UART_PARITY_ODD:
             parity = 0x01;
             break;     // Parity Odd
 
-        case UART_PARITY_EVEN:
+        case DAP_UART_PARITY_EVEN:
             parity = 0x03;
             break;    // Parity Even
 
-        case UART_PARITY_MARK:
+        case DAP_UART_PARITY_MARK:
             parity = 0x05;
             break;    // Parity Mark
 
-        case UART_PARITY_SPACE:
+        case DAP_UART_PARITY_SPACE:
             parity = 0x07;
             break;   // Parity Space
 
-        case UART_PARITY_NONE:                          // Parity None
+        case DAP_UART_PARITY_NONE:                          // Parity None
         default:
             parity = 0x00;
             break;
@@ -215,23 +215,23 @@ int32_t uart_get_configuration(UART_Configuration *config)
         case 2:
         case 4:
         case 6:
-            config->Parity = UART_PARITY_NONE;
+            config->Parity = DAP_UART_PARITY_NONE;
             break;
 
         case 1:
-            config->Parity = UART_PARITY_ODD;
+            config->Parity = DAP_UART_PARITY_ODD;
             break;
 
         case 3:
-            config->Parity = UART_PARITY_MARK;
+            config->Parity = DAP_UART_PARITY_MARK;
             break;
 
         case 5:
-            config->Parity = UART_PARITY_EVEN;
+            config->Parity = DAP_UART_PARITY_EVEN;
             break;
 
         case 7:
-            config->Parity = UART_PARITY_SPACE;
+            config->Parity = DAP_UART_PARITY_SPACE;
             break;
 
         default:
