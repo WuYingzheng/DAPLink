@@ -138,15 +138,9 @@ void EP_Status(U32 EPNum, U32 stat)
  *   Called by USBD_Init to enable the USB Interrupt
  *    Return Value:    None
  */
-
-#ifdef __RTX
-void __svc(1) USBD_IntrEna(void);
-void __SVC_1(void)
+void USBD_IntrEna(void)
 {
-#else
-void          USBD_IntrEna(void)
-{
-#endif
+    NVIC_SetPriority(USB_LP_CAN1_RX0_IRQn, 2);
     NVIC_EnableIRQ(USB_LP_CAN1_RX0_IRQn);
 }
 
